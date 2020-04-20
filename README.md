@@ -10,10 +10,11 @@ TERMUX
 5. node .
 
 WINDOWS
-1. npm install node-fetch && npm install chalk && npm install readline-sync && npm install cheerio
-2. Download zip digithub
-3. Open cmd
-4. node .
+1. Install nodejs https://nodejs.org/en/
+2. npm install node-fetch && npm install chalk && npm install readline-sync && npm install cheerio
+3. Download zip digithub
+4. Open cmd
+5. node .
 ```
 
 ## Credit
