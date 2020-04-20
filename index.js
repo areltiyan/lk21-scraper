@@ -162,92 +162,96 @@ const startDownloadLast = (link) => new Promise((resolve, reject) => {
 });
 
 (async() => {
-
-    console.log(chalk.cyan('- - SGBTEAM - -\nLayarkaca 21 Get Direct Link\nWithout Ads!\nCreated by AREL TIYAN\n- - SGBTEAM - -'))
-    while(1)
-    {
-        try{
-            
-            
-            const judul        = readlineSync.question(chalk.yellow("Judul filmnya dong gantenk/cantig : "))
-            const startGetJudul = await getJudul(judul)
-            console.log('[GET] => JUDUL')
-            if(typeof startGetJudul.link == 'undefined')
-            {
-                console.log('gaada')
-            }else{
-                console.log(`\n${chalk.yellow('Dicek dulu yaaaaa ada yang salah tidak')}\n\n${chalk.cyan('JUDUL ==>')} ${chalk.yellow(startGetJudul.title)}\n`)
-                const benar        = readlineSync.question(chalk.yellow("Bener ga judulnya gantenk/cantig? [y/n] : "))
-                if(benar == 'y')
+    try{
+        console.log(chalk.cyan('- - SGBTEAM - -\nLayarkaca 21 Get Direct Link\nWithout Ads!\nCreated by AREL TIYAN\n- - SGBTEAM - -'))
+        while(1)
+        {
+            try{
+                
+                
+                const judul        = readlineSync.question(chalk.yellow("Judul filmnya dong gantenk/cantig : "))
+                const startGetJudul = await getJudul(judul)
+                console.log('[GET] => JUDUL')
+                if(typeof startGetJudul.link == 'undefined')
                 {
-                    const startGetDownloadSource = await getDownloadSource(startGetJudul.link)
-                    console.log('[GET] => LINK DOWNLOAD')
-                    if(typeof startGetDownloadSource == 'undefined')
+                    console.log('gaada')
+                }else{
+                    console.log(`\n${chalk.yellow('Dicek dulu yaaaaa ada yang salah tidak')}\n\n${chalk.cyan('JUDUL ==>')} ${chalk.yellow(startGetJudul.title)}\n`)
+                    const benar        = readlineSync.question(chalk.yellow("Bener ga judulnya gantenk/cantig? [y/n] : "))
+                    if(benar == 'y')
                     {
-                        console.log('error startGetDownloadSource ')
-                    }else{
-                        const startGetRedirect = await getRedirect(startGetDownloadSource)
-                        console.log('[BYPASS] => REDIRECT')
-                        if(typeof startGetRedirect == 'undefined')
+                        const startGetDownloadSource = await getDownloadSource(startGetJudul.link)
+                        console.log('[GET] => LINK DOWNLOAD')
+                        if(typeof startGetDownloadSource == 'undefined')
                         {
-                            console.log('error startGetRedirect ')
+                            console.log('error startGetDownloadSource ')
                         }else{
-                            const startinsideGetRedirect = await getinsideRedirect(startGetRedirect)
-                            console.log('[BYPASS] => REDIRECT 2')
-                            if(typeof startinsideGetRedirect == 'undefined')
+                            const startGetRedirect = await getRedirect(startGetDownloadSource)
+                            console.log('[BYPASS] => REDIRECT')
+                            if(typeof startGetRedirect == 'undefined')
                             {
-                                console.log('error startinsideGetRedirect ')
+                                console.log('error startGetRedirect ')
                             }else{
-                                const startgetDownloadPage = await getDownloadPage(startinsideGetRedirect)
-                                console.log('[BYPASS] => DOWNLOAD PAGE')
-                                if(typeof startgetDownloadPage.link == 'undefined')
+                                const startinsideGetRedirect = await getinsideRedirect(startGetRedirect)
+                                console.log('[BYPASS] => REDIRECT 2')
+                                if(typeof startinsideGetRedirect == 'undefined')
                                 {
-                                    console.log('error startgetDownloadPage ')
+                                    console.log('error startinsideGetRedirect ')
                                 }else{
-                                    const startgetDownloadLink = await getDownloadLink(startgetDownloadPage.link, startgetDownloadPage.cookie, startinsideGetRedirect, startgetDownloadPage.boday)
-                                    console.log('[BYPASS] => GETTING DOWNLOAD LINK')
-                                    if(typeof startgetDownloadLink.link == 'undefined')
+                                    const startgetDownloadPage = await getDownloadPage(startinsideGetRedirect)
+                                    console.log('[BYPASS] => DOWNLOAD PAGE')
+                                    if(typeof startgetDownloadPage.link == 'undefined')
                                     {
-                                        console.log('[ERROR] => GETTING DOWNLOAD LINK\n')
-                                        console.log('[SUCCESS] => GETTING MIRROR DOWNLOAD LINK\n')
-                                        const text = chalk.yellow('MIRROR DOWNLOAD') + '\n'+ chalk.green(startgetDownloadLink.mirror.join('\n'))
-                                        console.log(text)
+                                        console.log('error startgetDownloadPage ')
                                     }else{
-                                        const startDownloadLastt = await startDownloadLast(`https://layarkacaxxi.org/api/source/` + startgetDownloadLink.link)
-                                        if(startDownloadLastt.success == true)
+                                        const startgetDownloadLink = await getDownloadLink(startgetDownloadPage.link, startgetDownloadPage.cookie, startinsideGetRedirect, startgetDownloadPage.boday)
+                                        console.log('[BYPASS] => GETTING DOWNLOAD LINK')
+                                        if(typeof startgetDownloadLink.link == 'undefined')
                                         {
-                                            
-                                            console.log('[SUCCESS] => GETTING DOWNLOAD LINK\n')
-                                            const link = [];
-                                            for(let i=0;i<startDownloadLastt.data.length;i++)
-                                            {
-                                                link.push(startDownloadLastt.data[i].label+' => '+ startDownloadLastt.data[i].file)
-                                            }
-                                            const a = {
-                                                direct: link,
-                                                mirror: startgetDownloadLink.mirror
-                                            }
-                                            const text = chalk.yellow(`LINK DIRECT (AUTO DOWNLOAD)`) + `\n` + chalk.green(a.direct.join('\n')) + `\n\n` + chalk.yellow('MIRROR DOWNLOAD') + '\n'+ chalk.green(a.mirror.join('\n'))
-                                            console.log(text)
-                                        }else{
                                             console.log('[ERROR] => GETTING DOWNLOAD LINK\n')
                                             console.log('[SUCCESS] => GETTING MIRROR DOWNLOAD LINK\n')
                                             const text = chalk.yellow('MIRROR DOWNLOAD') + '\n'+ chalk.green(startgetDownloadLink.mirror.join('\n'))
                                             console.log(text)
+                                        }else{
+                                            const startDownloadLastt = await startDownloadLast(`https://layarkacaxxi.org/api/source/` + startgetDownloadLink.link)
+                                            if(startDownloadLastt.success == true)
+                                            {
+                                                
+                                                console.log('[SUCCESS] => GETTING DOWNLOAD LINK\n')
+                                                const link = [];
+                                                for(let i=0;i<startDownloadLastt.data.length;i++)
+                                                {
+                                                    link.push(startDownloadLastt.data[i].label+' => '+ startDownloadLastt.data[i].file)
+                                                }
+                                                const a = {
+                                                    direct: link,
+                                                    mirror: startgetDownloadLink.mirror
+                                                }
+                                                const text = chalk.yellow(`LINK DIRECT (AUTO DOWNLOAD)`) + `\n` + chalk.green(a.direct.join('\n')) + `\n\n` + chalk.yellow('MIRROR DOWNLOAD') + '\n'+ chalk.green(a.mirror.join('\n'))
+                                                console.log(text)
+                                            }else{
+                                                console.log('[ERROR] => GETTING DOWNLOAD LINK\n')
+                                                console.log('[SUCCESS] => GETTING MIRROR DOWNLOAD LINK\n')
+                                                const text = chalk.yellow('MIRROR DOWNLOAD') + '\n'+ chalk.green(startgetDownloadLink.mirror.join('\n'))
+                                                console.log(text)
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
+                    }else{
+                        console.log('Oke deh gantenk/cantig kita cari lagi')
                     }
-                }else{
-                    console.log('Oke deh gantenk/cantig kita cari lagi')
                 }
+            }catch(err)
+            {
+                console.log('Errorrrrrr =>', err)
             }
-        }catch(err)
-        {
-            console.log('Errorrrrrr =>', err)
         }
+    }catch(err){
+        console.log(err)
     }
+    
     
 })()
