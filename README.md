@@ -12,9 +12,10 @@ TERMUX
 WINDOWS
 1. Install nodejs https://nodejs.org/en/
 2. npm install node-fetch && npm install chalk && npm install readline-sync && npm install cheerio
-3. Download zip digithub
-4. Open cmd
-5. node .
+3. Download zip https://github.com/areltiyan/lk21-scraper
+4. Extract dan Tahan SHIFT + KLIK KANAN 
+5. Open command window here/Powershell
+6. node .
 ```
 
 ## Credit
