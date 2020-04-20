@@ -161,6 +161,22 @@ const startDownloadLast = (link) => new Promise((resolve, reject) => {
     .catch(err => reject(err))
 });
 
+const shortlink = (link) => new Promise((resolve, reject) => {
+    fetch(`https://tinyurl.com/api-create.php?url=${link}`, {
+        method: 'GET',
+        headers: {
+"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
+        },
+     // body: `url=${link}&type=direct&expiry=&password=&description=&multiple=0`
+    })
+    .then(async res => {
+        const result = await res.text()
+
+        resolve(result)
+    })
+    .catch(err => reject(err))
+});
+
 (async() => {
     try{
         console.log(chalk.cyan('- - SGBTEAM - -\nLayarkaca 21 Get Direct Link\nWithout Ads!\nCreated by AREL TIYAN\n- - SGBTEAM - -'))
@@ -221,7 +237,7 @@ const startDownloadLast = (link) => new Promise((resolve, reject) => {
                                                 const link = [];
                                                 for(let i=0;i<startDownloadLastt.data.length;i++)
                                                 {
-                                                    link.push(startDownloadLastt.data[i].label+' => '+ startDownloadLastt.data[i].file)
+                                                    link.push(startDownloadLastt.data[i].label+' => '+ await shortlink(startDownloadLastt.data[i].file))
                                                 }
                                                 const a = {
                                                     direct: link,
