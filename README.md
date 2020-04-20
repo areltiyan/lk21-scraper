@@ -3,7 +3,7 @@
 ## Installation
 ```
 TERMUX
-1. pkg install git && pkg install nodejs
+1. pkg install git && pkg install nodejs-lts
 2. git clone https://github.com/areltiyan/lk21-scraper.git
 3. cd lk21-scraper
 4. npm install node-fetch && npm install chalk && npm install readline-sync && npm install cheerio
