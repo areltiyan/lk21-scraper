@@ -1,7 +1,8 @@
 const fetch = require('node-fetch');
 var cheerio = require('cheerio');
-const chalk = require('chalk')
+const chalk = require('chalk');
 const readlineSync = require('readline-sync');
+
 const getJudul = (judul) => new Promise((resolve, reject) => {
     fetch(`http://149.56.24.226/?s=${judul.replace(/\s/g, "+")}`, {
         method: 'GET',
@@ -161,9 +162,13 @@ const startDownloadLast = (link) => new Promise((resolve, reject) => {
 });
 
 (async() => {
+
+    console.log(chalk.cyan('- - SGBTEAM - -\nLayarkaca 21 Get Direct Link\nWithout Ads!\nCreated by AREL TIYAN\n- - SGBTEAM - -'))
     while(1)
     {
         try{
+            
+            
             const judul        = readlineSync.question(chalk.yellow("Judul filmnya dong gantenk/cantig : "))
             const startGetJudul = await getJudul(judul)
             console.log('[GET] => JUDUL')
